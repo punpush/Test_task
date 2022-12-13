@@ -10,7 +10,7 @@
 #include<condition_variable>
 #include<chrono>
 
-
+// Новые классы записать в хедеры?
 
 // Циклический буффер
 struct Buffer
