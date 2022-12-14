@@ -1,7 +1,7 @@
 ﻿
 
 
-// подключение библиотек
+// подключение библиотек и классов
 #include <iostream>
 #include<fstream>
 #include<thread>
@@ -9,14 +9,9 @@
 #include<mutex>
 #include<condition_variable>
 #include<chrono>
+#include "Buffer.h"
 
-// Новые классы записать в хедеры?
 
-// Циклический буффер
-struct Buffer
-{
-    Buffer() {};
-};
 
 // Класс сообщений, содержащий размер и указатель на данные 
 struct Message
@@ -39,6 +34,8 @@ struct Message
 void read() {
 
     // Выделение памяти буффером
+
+    Buffer<std::uint8_t> buffer(256);
 
     // Ввод необходимых параметров
     int T = 0;
