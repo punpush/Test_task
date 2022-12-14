@@ -8,6 +8,8 @@
 template<typename Type>
 struct Buffer
 {
+    setlocale(LC_ALL, "ru"); // Поддержка русского языка
+
     Buffer(size_t max_size): max_size(max_size), buffer(new Type[max_size]) {};
 
    //Запись в буфер
