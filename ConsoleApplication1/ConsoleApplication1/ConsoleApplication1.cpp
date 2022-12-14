@@ -37,6 +37,7 @@ void read() {
 
     Buffer<std::uint64_t> buffer(32000000);
 
+
     // Ввод необходимых параметров
     int T = 0;
     size_t M = 0;
