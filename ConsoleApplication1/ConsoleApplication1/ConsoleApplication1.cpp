@@ -12,24 +12,6 @@
 #include "Buffer.h"
 
 
-
-// Класс сообщений, содержащий размер и указатель на данные 
-struct Message
-{
-    Message(size_t file_size, int* data_):file_size(file_size), data_(new int[file_size]) {};
-
-    ~Message() {
-        delete [] data_;
-    }
-
-    size_t file_size;
-    int* data_;
-};
-
-
-
-
-
 // Функция рид, обеспечивающая работу 1 потока
 void read() {
 
