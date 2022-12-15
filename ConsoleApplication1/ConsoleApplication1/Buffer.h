@@ -10,6 +10,10 @@ struct Buffer
 {
 
     Buffer(size_t max_size): max_size(max_size), buffer(new Type[max_size]) {};
+    
+    ~Buffer() {
+        delete[] buffer;
+    }
 
    //Запись в буфер
 
