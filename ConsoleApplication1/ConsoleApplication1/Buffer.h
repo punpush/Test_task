@@ -3,7 +3,7 @@
 
 
 
-// При записи или чтении голова и хвост движутся вперед, при достижении последнего элемента - переход к первому
+// ГЏГ°ГЁ Г§Г ГЇГЁГ±ГЁ ГЁГ«ГЁ Г·ГІГҐГ­ГЁГЁ ГЈГ®Г«Г®ГўГ  ГЁ ГµГўГ®Г±ГІ Г¤ГўГЁГ¦ГіГІГ±Гї ГўГЇГҐГ°ГҐГ¤, ГЇГ°ГЁ Г¤Г®Г±ГІГЁГ¦ГҐГ­ГЁГЁ ГЇГ®Г±Г«ГҐГ¤Г­ГҐГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ  - ГЇГҐГ°ГҐГµГ®Г¤ ГЄ ГЇГҐГ°ГўГ®Г¬Гі
 
 template<typename Type>
 struct Buffer
@@ -15,7 +15,7 @@ struct Buffer
         delete[] buffer;
     }
 
-   //Запись в буфер
+   //Г‡Г ГЇГЁГ±Гј Гў ГЎГіГґГҐГ°
 
     void add(Type n) {
 
@@ -26,14 +26,12 @@ struct Buffer
 
         buffer[head] = n;
 
-        std::cout << sizeof(buffer[head])<< std:: endl << &buffer[head] << std:: endl;
-
         head = (head + 1) % max_size;
 
        
     }
 
-    // Чтение из буфера
+    // Г—ГІГҐГ­ГЁГҐ ГЁГ§ ГЎГіГґГҐГ°Г 
 
     Type get() {
         if (empty())
@@ -44,25 +42,23 @@ struct Buffer
         Type value = buffer[tail];
         tail = (tail + 1) % max_size;
 
-        std::cout << value << std::endl; 
-
 
         return value;
     }
 
     bool empty() {
-        return head == tail; // Проверка на пустоту
+        return head == tail; // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГЇГіГ±ГІГ®ГІГі
     }
     bool full() {
-        return tail == (head + 1) ; // Проверка на переполнение
+        return tail == (head + 1) % max_size; // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГЇГҐГ°ГҐГЇГ®Г«Г­ГҐГ­ГЁГҐ
     }
 
     protected:
         
-        Type* buffer; // Область памяти
-        size_t head = 0; // Голова буфера
-        size_t tail = 0; // Хвост буфера
-        const size_t max_size; // Размер буффера
+        Type* buffer; // ГЋГЎГ«Г Г±ГІГј ГЇГ Г¬ГїГІГЁ
+        size_t head = 0; // ГѓГ®Г«Г®ГўГ  ГЎГіГґГҐГ°Г 
+        size_t tail = 0; // Г•ГўГ®Г±ГІ ГЎГіГґГҐГ°Г 
+        const size_t max_size; // ГђГ Г§Г¬ГҐГ° ГЎГіГґГґГҐГ°Г 
        
 
 };
