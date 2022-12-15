@@ -10,6 +10,7 @@
 #include<condition_variable>
 #include<chrono>
 #include "Buffer.h"
+#include "Message.h"
 
 
 // Функция рид, обеспечивающая работу 1 потока
@@ -18,6 +19,7 @@ void read() {
     // Выделение памяти буффером, как сделать лучше?
 
     Buffer<std::uint64_t> buffer(32000000);
+
 
 
     // Ввод необходимых параметров
@@ -43,6 +45,8 @@ void create() {
 int main()
 {
     setlocale(LC_ALL, "ru"); // Поддержка русского языка
+
+  
     
     std::queue<int> message_queue; // создание очереди месседжей, с которой будут работать потоки
 

@@ -26,8 +26,11 @@ struct Buffer
 
         buffer[head] = n;
 
+        std::cout << sizeof(buffer[head])<< std:: endl << &buffer[head] << std:: endl;
+
         head = (head + 1) % max_size;
 
+       
     }
 
     // Чтение из буфера
@@ -41,6 +44,9 @@ struct Buffer
         Type value = buffer[tail];
         tail = (tail + 1) % max_size;
 
+        std::cout << value << std::endl; 
+
+
         return value;
     }
 
@@ -51,7 +57,7 @@ struct Buffer
         return tail == (head + 1) ; // Проверка на переполнение
     }
 
-    private:
+    protected:
         
         Type* buffer; // Область памяти
         size_t head = 0; // Голова буфера
