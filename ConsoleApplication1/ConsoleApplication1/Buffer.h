@@ -6,7 +6,7 @@ template<typename Type>
 struct Buffer
 {
 
-    Buffer(size_t max_size): max_size(max_size), buffer(new Type[max_size]) {};
+    Buffer() { buffer = new Type[max_size]; };
 
     ~Buffer() {
         delete[] buffer;
@@ -28,20 +28,22 @@ struct Buffer
 
     }
 
-    // Чтение из буфера
+    // Чтение адреса хвоста из буфера
 
-    Type get() {
+    Type* get() {
         if (empty())
         {
             throw std::runtime_error("buffer is empty");
         }
 
-        Type value = buffer[tail];
+
+        return &buffer[tail];
+        //Type value = buffer[tail];
         tail = (tail + 1) % max_size;
 
 
 
-        return value;
+        
     }
 
     bool empty() {
@@ -56,7 +58,7 @@ struct Buffer
         Type* buffer; // Область памяти
         size_t head = 0; // Голова буфера
         size_t tail = 0; // Хвост буфера
-        const size_t max_size; // Размер буффера
+        const size_t max_size = 32000000; // Размер буффера
 
 
 };
