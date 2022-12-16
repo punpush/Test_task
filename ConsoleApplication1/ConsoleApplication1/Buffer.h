@@ -1,25 +1,22 @@
 #pragma once
 
-
-
-
-// Ïðè çàïèñè èëè ÷òåíèè ãîëîâà è õâîñò äâèæóòñÿ âïåðåä, ïðè äîñòèæåíèè ïîñëåäíåãî ýëåìåíòà - ïåðåõîä ê ïåðâîìó
+// При записи или чтении голова и хвост движутся вперед, при достижении последнего элемента - переход к первому
 
 template<typename Type>
 struct Buffer
 {
 
     Buffer(size_t max_size): max_size(max_size), buffer(new Type[max_size]) {};
-    
+
     ~Buffer() {
         delete[] buffer;
     }
 
-   //Çàïèñü â áóôåð
+   //Запись в буфер
 
     void add(Type n) {
 
-        if (full()) 
+        if (full())
         {
             throw std::runtime_error("buffer is full");
         }
@@ -28,10 +25,10 @@ struct Buffer
 
         head = (head + 1) % max_size;
 
-       
+
     }
 
-    // ×òåíèå èç áóôåðà
+    // Чтение из буфера
 
     Type get() {
         if (empty())
@@ -43,22 +40,23 @@ struct Buffer
         tail = (tail + 1) % max_size;
 
 
+
         return value;
     }
 
     bool empty() {
-        return head == tail; // Ïðîâåðêà íà ïóñòîòó
+        return head == tail; // Проверка на пустоту
     }
     bool full() {
-        return tail == (head + 1) % max_size; // Ïðîâåðêà íà ïåðåïîëíåíèå
+        return tail == (head + 1) ; // Проверка на переполнение
     }
 
     protected:
-        
-        Type* buffer; // Îáëàñòü ïàìÿòè
-        size_t head = 0; // Ãîëîâà áóôåðà
-        size_t tail = 0; // Õâîñò áóôåðà
-        const size_t max_size; // Ðàçìåð áóôôåðà
-       
+
+        Type* buffer; // Область памяти
+        size_t head = 0; // Голова буфера
+        size_t tail = 0; // Хвост буфера
+        const size_t max_size; // Размер буффера
+
 
 };
