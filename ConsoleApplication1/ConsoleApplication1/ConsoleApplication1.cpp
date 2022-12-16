@@ -10,7 +10,7 @@
 #include<condition_variable>
 #include<chrono>
 #include "Buffer.h"
-#include "Message.h"
+#include "MessageQueue.h"
 
 
 // Функция рид, обеспечивающая работу 1 потока
@@ -18,9 +18,9 @@ void read() {
 
     // Выделение памяти буффером, как сделать лучше?
 
-    Buffer<std::uint64_t> buffer(32000000);
+    Buffer<std::uint64_t> buffer;
 
-
+    MessageQueue<std::uint64_t> queue_;
 
     // Ввод необходимых параметров
     int T = 0;
