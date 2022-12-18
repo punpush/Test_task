@@ -4,19 +4,19 @@
 #include "Buffer.h"
 
 
-// Класс, осуществляющий заполнение буфера, с периодичностью Т
+// РљР»Р°СЃСЃ, РѕСЃСѓС‰РµСЃС‚РІР»СЏСЋС‰РёР№ Р·Р°РїРѕР»РЅРµРЅРёРµ Р±СѓС„РµСЂР°, СЃ РїРµСЂРёРѕРґРёС‡РЅРѕСЃС‚СЊСЋ Рў
 template<typename Type>
 struct Counter : Buffer<Type>
 {
 
     Counter(int T, size_t M, Buffer<Type>& buffer): T(T), M(M), buffer(buffer) {}
 
-    // метод заполнения буфера
+     // РјРµС‚РѕРґ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р±СѓС„РµСЂР°
     void fill_in() {
         while ((Wcounter <= M * 500000))
         {
-            while (counter < 500000) {    //заполнение 1 МБ
-                buffer.add(rand() % 100); // заполнение случайными числами
+            while (counter < 500000) {    //Р·Р°РїРѕР»РЅРµРЅРёРµ 1 РњР‘
+                buffer.add(rand() % 100); // Р·Р°РїРѕР»РЅРµРЅРёРµ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё
                 counter++;
                 Wcounter++;
             }
@@ -25,14 +25,14 @@ struct Counter : Buffer<Type>
         }
     }
         
-    void create_message() {
+   // void create_message() {
 
 
 
     }
 
     void waiting(int T) {
-        Sleep(T*1000); // ожидание в секундах
+        Sleep(T*1000); // РѕР¶РёРґР°РЅРёРµ РІ СЃРµРєСѓРЅРґР°С…
     }
 
 protected:
