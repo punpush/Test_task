@@ -7,50 +7,33 @@
 
 
 
-// РљР»Р°СЃСЃ, РѕСЃСѓС‰РµСЃС‚РІР»СЏСЋС‰РёР№ Р·Р°РїРѕР»РЅРµРЅРёРµ Р±СѓС„РµСЂР°, СЃ РїРµСЂРёРѕРґРёС‡РЅРѕСЃС‚СЊСЋ Рў
+// Счетчик, заполняющий буфер 1МБ данных каждые Т секунд
 template<typename Type>
 struct Counter 
 {
 
     Counter(int T, size_t M, Buffer<Type>& buffer, MessageQueue<std::uint64_t> &queue_): T(T), M(M), buffer(buffer), queue_(queue_) {}
 
-     // РјРµС‚РѕРґ Р·Р°РїРѕР»РЅРµРЅРёСЏ Р±СѓС„РµСЂР°
+     // Метод, реализующий заполнение и отправку сообщения
     void fill_in() {
-        while ((Wcounter <= M)) // *500000
+        while ((Wcounter < M)) // *500000
         {
-<<<<<<< HEAD
-            while (counter < 10) {    //заполнение 1 МБ <500000
-                buffer.add(Wcounter); // заполнение случайными числами
-=======
-            while (counter < 500000) {    //Р·Р°РїРѕР»РЅРµРЅРёРµ 1 РњР‘
-                buffer.add(rand() % 100); // Р·Р°РїРѕР»РЅРµРЅРёРµ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё
->>>>>>> b436335a784424dd8da5175bb15be10d5fa8b98d
-                counter++;
-                Wcounter++;
+
+                while (counter < 10) 
+                {   
+                    buffer.add(Wcounter); // Заполнение счетчиком
+
+                    counter++;
+                    Wcounter++;
+                }
+                counter = 0;
+                queue_.get_message(buffer);
+                buffer.reset();
+                std::this_thread::sleep_for(T);
             }
-            counter = 0;
-            queue_.get_message(buffer);
-            std::this_thread::sleep_for(T);
         }
-    }
-        
-<<<<<<< HEAD
- 
+    
 
-
-
-=======
-   // void create_message() {
-
-
-
-    }
-
-    void waiting(int T) {
-        Sleep(T*1000); // РѕР¶РёРґР°РЅРёРµ РІ СЃРµРєСѓРЅРґР°С…
-    }
-
->>>>>>> b436335a784424dd8da5175bb15be10d5fa8b98d
 protected:
 
 
@@ -62,4 +45,4 @@ protected:
     size_t M = 0;
     size_t counter = 0;
     size_t Wcounter = 0;
-};
+    };

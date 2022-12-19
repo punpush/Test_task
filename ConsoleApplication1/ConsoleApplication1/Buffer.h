@@ -42,9 +42,13 @@ struct Buffer
 
         return std::pair<size_t, Type*>((head - tail), &buffer[tail]);
 
-        tail = head;
+        }
 
-    }
+
+        void reset() 
+        {
+           tail = head;
+        }
 
     bool empty() {
         return head == tail; // Проверка на пустоту
