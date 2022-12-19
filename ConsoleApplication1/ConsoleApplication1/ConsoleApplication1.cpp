@@ -31,15 +31,12 @@ void read() {
     std::cin >> M;
     std::cout << std::endl;
    
-    MessageQueue<std::uint64_t> queue_(256); // создание очереди месседжей, с которой будут работать потоки
+    MessageQueue<std::uint64_t> queue_(256,buffer); // создание очереди месседжей, с которой будут работать потоки
     
-    Counter<std::uint64_t> counter(T, M, buffer);
+    Counter<std::uint64_t> counter(T, M, buffer, queue_);
 
     counter.fill_in();
-
-
-    buffer.get();
-
+    
     buffer.clear();
 }
 

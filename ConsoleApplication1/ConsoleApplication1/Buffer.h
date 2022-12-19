@@ -1,4 +1,5 @@
 #pragma once
+#include "utility"
 
 // При записи или чтении голова и хвост движутся вперед, при достижении последнего элемента - переход к первому
 
@@ -9,12 +10,6 @@ struct Buffer
     Buffer(size_t max_size):max_size(max_size), buffer (new Type[max_size]) {}
 
     Buffer() {}
-
-   
-
-  //  void init() {
-   // buffer(new Type[max_size];
-   // }
 
     void clear() {
         delete[] buffer;
@@ -37,19 +32,17 @@ struct Buffer
 
     }
 
-    // Чтение адреса хвоста из буфера
+    // Указатель на данные и их размер
 
-        Type* get() {
+        std::pair<size_t,Type*> get() {
         if (empty())
         {
             throw std::runtime_error("buffer is empty");
         }
 
-        std::cout << &buffer[tail] <<"  "<< buffer[tail] << std::endl << tail << std::endl;
+        return std::pair<size_t, Type*>((head - tail), &buffer[tail]);
 
-        tail = (tail + 1) % max_size;
-
-        return &buffer[tail-1];
+        tail = head;
 
     }
 

@@ -13,18 +13,18 @@ template<typename Type>
 struct MessageQueue  
 {
 
-    MessageQueue(size_t size_) : size_(size_) {};
+    MessageQueue(size_t size_,Buffer<Type>& buffer) : size_(size_), buffer(buffer) {}
     
 
+    void get_message(Buffer<Type>& buffer) {
 
-    void read(size_of_message, data_) {
-
+        std::pair<size_t, Type*> message = buffer.get();
         if (size_now < size_) {
-            gq.push({ size_of_message,data_ }); // очередь, хранящая пару из размера и указателя на область памяти
+            gq.push(message); // очередь, хранящая пару из размера и указателя на область памяти
             size_now++; // увеличение размера очереди 
+
         }
     }
-
 
 protected:
 
