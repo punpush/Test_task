@@ -29,13 +29,13 @@ struct FileManager
 
 		Type* data = message.second;
 
-		for (size_t i = 0; i < message.first; i++) // запись в конец еще не реализована
+		for (size_t i = 0; i < message.first; i++) 
 		{
 			result << *data << " ";
 			data++;
 		}
 	}
 
-private:
+
 
 };
