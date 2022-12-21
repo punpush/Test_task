@@ -1,7 +1,8 @@
 #pragma once
 #include "utility"
 #include "MessageQueue.h"
-// При записи или чтении голова и хвост движутся вперед, при достижении последнего элемента - переход к первому
+// РџСЂРё Р·Р°РїРёСЃРё РёР»Рё С‡С‚РµРЅРёРё РіРѕР»РѕРІР° Рё С…РІРѕСЃС‚ РґРІРёР¶СѓС‚СЃСЏ РІРїРµСЂРµРґ, РїСЂРё РґРѕСЃС‚РёР¶РµРЅРёРё РїРѕСЃР»РµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° - РїРµСЂРµС…РѕРґ Рє РїРµСЂРІРѕРјСѓ
+
 
 template<typename Type>
 struct Buffer
@@ -24,7 +25,7 @@ struct Buffer
 
         buffer[head] = n;
 
-        //std::cout << &buffer[head] <<"  " << buffer[head] << std::endl << head << std::endl; //отладочная строка
+        //std::cout << &buffer[head] <<"  " << buffer[head] << std::endl << head << std::endl; //РѕС‚Р»Р°РґРѕС‡РЅР°СЏ СЃС‚СЂРѕРєР°
 
         head = (head + 1) % max_size;
 
@@ -32,7 +33,7 @@ struct Buffer
 
     }
 
-    // Указатель на данные и их размер
+    // РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РґР°РЅРЅС‹Рµ Рё РёС… СЂР°Р·РјРµСЂ
 
     std::pair<size_t, Type*> get() {
         if (empty())
@@ -52,18 +53,18 @@ struct Buffer
     }
 
     bool empty() {
-        return head == tail; // Проверка на пустоту
+        return head == tail; // РџСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ
     }
     bool full() {
-        return tail == (head + 1); // Проверка на переполнение
+        return tail == (head + 1); // РџСЂРѕРІРµСЂРєР° РЅР° РїРµСЂРµРїРѕР»РЅРµРЅРёРµ
     }
 
 protected:
 
-    Type* buffer; // Область памяти
-    size_t head = 0; // Голова буфера
-    size_t tail = 0; // Хвост буфера
-    const size_t max_size = 0; // Размер буффера
+    Type* buffer; // РћР±Р»Р°СЃС‚СЊ РїР°РјСЏС‚Рё
+    size_t head = 0; // Р“РѕР»РѕРІР° Р±СѓС„РµСЂР°
+    size_t tail = 0; // РҐРІРѕСЃС‚ Р±СѓС„РµСЂР°
+    const size_t max_size = 0; // Р Р°Р·РјРµСЂ Р±СѓС„С„РµСЂР°
 
 
 };
