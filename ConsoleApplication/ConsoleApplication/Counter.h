@@ -9,14 +9,14 @@
 
 
 
-// Счетчик, заполняющий буфер 1МБ данных каждые Т секунд
+// РЎС‡РµС‚С‡РёРє, Р·Р°РїРѕР»РЅСЏСЋС‰РёР№ Р±СѓС„РµСЂ 1РњР‘ РґР°РЅРЅС‹С… РєР°Р¶РґС‹Рµ Рў СЃРµРєСѓРЅРґ
 template<typename Type>
 struct Counter
 {
 
     Counter(int T, size_t M, Buffer<Type>& buffer, MessageQueue<std::uint64_t>& queue_) : T(T), M(M), buffer(buffer), queue_(queue_) {}
 
-    // Метод, реализующий заполнение и отправку сообщения
+     // РњРµС‚РѕРґ, СЂРµР°Р»РёР·СѓСЋС‰РёР№ Р·Р°РїРѕР»РЅРµРЅРёРµ Рё РѕС‚РїСЂР°РІРєСѓ СЃРѕРѕР±С‰РµРЅРёСЏ
     void fill_in() {
 
         while ((Wcounter < M)) // *500000
@@ -26,11 +26,11 @@ struct Counter
                 exit(0);
             }
 
-            while ((counter < 10) && (Wcounter < M))  // 1 МБ (500000)
+            while ((counter < 10) && (Wcounter < M))  // 1 РњР‘ (500000)
             {
-                buffer.add(Wcounter); // Заполнение счетчиком
+                buffer.add(Wcounter); // Р—Р°РїРѕР»РЅРµРЅРёРµ СЃС‡РµС‚С‡РёРєРѕРј
 
-                counter++; // Инкрементирование счетчиков
+                counter++; // РРЅРєСЂРµРјРµРЅС‚РёСЂРѕРІР°РЅРёРµ СЃС‡РµС‚С‡РёРєРѕРІ
                 Wcounter++;
             }
             counter = 0;
