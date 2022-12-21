@@ -7,7 +7,7 @@
 #include <condition_variable>
 
 
-// Класс сообщений, содержащий размер и указатель на данные в буфере
+// РљР»Р°СЃСЃ СЃРѕРѕР±С‰РµРЅРёР№, СЃРѕРґРµСЂР¶Р°С‰РёР№ СЂР°Р·РјРµСЂ Рё СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РґР°РЅРЅС‹Рµ РІ Р±СѓС„РµСЂРµ
 
 template<typename Type>
 struct MessageQueue
@@ -21,8 +21,8 @@ struct MessageQueue
         std::unique_lock<std::mutex> ul1(data_mutex);
 
         if (size_now < size_) {
-            size_data.push(message); // очередь, хранящая пару из размера и указателя на область памяти
-            size_now++; // увеличение размера очереди 
+            size_data.push(message); // РѕС‡РµСЂРµРґСЊ, С…СЂР°РЅСЏС‰Р°СЏ РїР°СЂСѓ РёР· СЂР°Р·РјРµСЂР° Рё СѓРєР°Р·Р°С‚РµР»СЏ РЅР° РѕР±Р»Р°СЃС‚СЊ РїР°РјСЏС‚Рё
+            size_now++; // СѓРІРµР»РёС‡РµРЅРёРµ СЂР°Р·РјРµСЂР° РѕС‡РµСЂРµРґРё
 
         }
         else throw std::runtime_error("queue is full");
@@ -60,8 +60,8 @@ public:
     std::condition_variable cv;
     std::mutex data_mutex;
     Type* data_;
-    size_t size_of_message = 0; // размер читаемых данных
-    size_t size_now = 0; // текущая очередь
-    size_t size_ = 0; // дазмер очереди
-    std::queue<std::pair<size_t, Type*>> size_data; // очередь сообщений 
+    size_t size_of_message = 0; // СЂР°Р·РјРµСЂ С‡РёС‚Р°РµРјС‹С… РґР°РЅРЅС‹С…
+    size_t size_now = 0; // С‚РµРєСѓС‰Р°СЏ РѕС‡РµСЂРµРґСЊ
+    size_t size_ = 0; // РґР°Р·РјРµСЂ РѕС‡РµСЂРµРґРё
+    std::queue<std::pair<size_t, Type*>> size_data; // РѕС‡РµСЂРµРґСЊ СЃРѕРѕР±С‰РµРЅРёР№ 
 };
