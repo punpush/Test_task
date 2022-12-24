@@ -24,7 +24,8 @@ struct MessageQueue
             size_data.push(message); // очередь, хранящая пару из размера и указателя на область памяти
 
             size_now++; // увеличение размера очереди 
-
+            
+            std::cout << "размер очереди " << size_now << std::endl; // Вывод размера очереди
 
         }
         else throw std::runtime_error("queue is full");
