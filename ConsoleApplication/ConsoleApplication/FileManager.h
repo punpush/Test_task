@@ -50,8 +50,6 @@ struct FileManager
 
 		result.close();
 
-		system("cls");
-
 		std::cout << "скорость записи в файл " << speed << " МБ/C" << std::endl;
 
 		
