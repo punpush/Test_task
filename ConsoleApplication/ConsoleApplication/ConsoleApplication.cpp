@@ -1,11 +1,7 @@
 ﻿// подключение библиотек и классов
+// подключение библиотек и классов
 #include <iostream>
-#include<fstream>
 #include<thread>
-#include<queue>
-#include<mutex>
-#include<condition_variable>
-#include<chrono>
 #include "Buffer.h"
 #include "MessageQueue.h"
 #include "Counter.h"
@@ -18,7 +14,9 @@ void read(int T, size_t M, Buffer<Type>& buffer, MessageQueue<Type>& queue_) {
 
 
 
-    Counter<std::uint64_t> counter(T, M, buffer, queue_);
+    Counter<Type> counter(T, M, buffer, queue_);
+
+    // Запись данных в буфер
 
     counter.fill_in();
 
@@ -27,16 +25,21 @@ void read(int T, size_t M, Buffer<Type>& buffer, MessageQueue<Type>& queue_) {
 
 // Функция креэйт, обеспечивающая работу 2 потока 
 template<typename Type>
-void create(MessageQueue<Type>& queue_) {
-    // создание файла для записи ;
+void create(MessageQueue<Type>& queue_, size_t M) {
+    // Создание файла для записи ;
 
     FileManager file;
     file.create_file();
 
+    size_t counter = 0;
 
-    // Условие временное 
-    while (1) {
+    // Запись данных в файл
+    while (counter < M * 125000) {
+
+        counter += queue_.get();
+        
         file.writing(queue_.send_message());
+       
 
     }
 
@@ -61,14 +64,16 @@ int main()
     std::cin >> M;
     std::cout << std::endl;
 
+    system("cls"); // очистка экрана консоли
+
     MessageQueue<std::uint64_t> queue_(256); // создание очереди месседжей, с которой будут работать потоки
 
-
+    // Потоки
 
     std::thread th1([&]() {read(T, M, buffer, queue_); });
-    std::thread th2([&]() {create(queue_); });
+    std::thread th2([&]() {create(queue_,M); });
     th1.join();
     th2.join();
 
-    buffer.clear();
+    buffer.clear(); // Очистка памяти
 }
