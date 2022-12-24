@@ -3,14 +3,11 @@
 #include "MessageQueue.h"
 // При записи или чтении голова и хвост движутся вперед, при достижении последнего элемента - переход к первому
 
-
 template<typename Type>
 struct Buffer
 {
 
     Buffer(size_t max_size) :max_size(max_size), buffer(new Type[max_size]) {}
-
-    Buffer() {}
 
     void clear() {
         delete[] buffer;
@@ -24,8 +21,6 @@ struct Buffer
         }
 
         buffer[head] = n;
-
-        //std::cout << &buffer[head] <<"  " << buffer[head] << std::endl << head << std::endl; //отладочная строка
 
         head = (head + 1) % max_size;
 
@@ -58,6 +53,8 @@ struct Buffer
     bool full() {
         return tail == (head + 1); // Проверка на переполнение
     }
+
+
 
 protected:
 
